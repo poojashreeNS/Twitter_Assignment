@@ -2,7 +2,7 @@
 #------------------------------------------------------------
 # UI to support Twitter service to programmatically
 # create, retrieve and delete a Tweet using Twitter APIs
-# Author: charu.cheema@sjsu.edu
+# Authors: charu.cheema@sjsu.edu, poojashree.ns@sjsu.edu
 #------------------------------------------------------------
 -->
 <!DOCTYPE html>
@@ -16,25 +16,27 @@
 			 <div class="row">
 				 <div class="p-3">
 					 <form class="form-inline" method="POST" action="{{ url_for('post_tweet') }}">
-						 <input class="form-control" type="text" name="new_tweet">
+						 <input class="form-control" type="text" name="new_tweet" />
 						 <button class="btn btn-primary" type="submit">Post a new tweet</button>
 					 </form>
 				 </div>
 				 <div class="col-md-6">
-					 {% for tweet in tweets %}
+					 <form class="form-inline" method="POST" action="{{ url_for('fetch_tweets') }}">
+						 <input class="form-control" type="text" name="key_tweet" />
+						 <button class="btn btn-primary" type="submit">fetch tweets</button>
+					 </form>
 					 <div class="card mt-2">
 						 <div class="card-body">
 							 <div class="card-text">
 								 <div class="p-3">
-									 {{ tweet._json.text }}
+									 {{ tweets.text }}
 									 <form class="form-inline" method="POST" action="{{ url_for('delete_tweet') }}">
-										 <button class="btn btn-primary" type="submit" name="to_be_deleted" value="{{ tweet._json.id }}">Delete!</button>
+										 <button class="btn btn-primary" type="submit" name="to_be_deleted" value="{{ tweets.id }}">Delete!</button>
 									 </form>
 								 </div>
 							 </div>
 						 </div>
 					 </div>
-					 {% endfor %}
 				 </div>
 			 </div>
 		 </div>
